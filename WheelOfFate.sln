@@ -3,7 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WheelOfFate.WebAPI", "WheelOfFate.WebAPI\WheelOfFate.WebAPI.csproj", "{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WheelOfFate.WebAPI", "WheelOfFate.WebAPI\WheelOfFate.WebAPI.csproj", "{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - API", "1 - API", "{869F01BE-246B-4071-AE51-451E9380714C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{83114F2B-0EA3-4375-B39C-6EE7BE7741CD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{FB796ED2-2AA3-4F2C-AE26-390FB6663D33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Tests", "5 - Tests", "{ABD40780-8464-44B1-A709-01983C75E494}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infrastructure", "4 - Infrastructure", "{B757863F-0FC9-45FF-ACB9-A1FF14036FB5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WheelOfFate.Domain", "WheelOfFate.Domain\WheelOfFate.Domain.csproj", "{8FF59805-4FD0-467A-89CC-6C3F9B5F073F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WheelOfFate.Services", "WheelOfFate.Services\WheelOfFate.Services.csproj", "{3002EFF3-7FE4-4857-A557-F883A601C4FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WheelOfFate.Data", "WheelOfFate.Data\WheelOfFate.Data.csproj", "{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WheelOfFate.Tests", "WheelOfFate.Tests\WheelOfFate.Tests.csproj", "{46D4F01A-825F-44BA-AB95-096E2DC677BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +33,32 @@ Global
 		{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF59805-4FD0-467A-89CC-6C3F9B5F073F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF59805-4FD0-467A-89CC-6C3F9B5F073F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF59805-4FD0-467A-89CC-6C3F9B5F073F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF59805-4FD0-467A-89CC-6C3F9B5F073F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3002EFF3-7FE4-4857-A557-F883A601C4FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3002EFF3-7FE4-4857-A557-F883A601C4FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3002EFF3-7FE4-4857-A557-F883A601C4FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3002EFF3-7FE4-4857-A557-F883A601C4FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46D4F01A-825F-44BA-AB95-096E2DC677BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46D4F01A-825F-44BA-AB95-096E2DC677BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46D4F01A-825F-44BA-AB95-096E2DC677BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46D4F01A-825F-44BA-AB95-096E2DC677BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1C59D19C-1DF3-4264-A5FD-A19CB35C8D04} = {869F01BE-246B-4071-AE51-451E9380714C}
+		{8FF59805-4FD0-467A-89CC-6C3F9B5F073F} = {FB796ED2-2AA3-4F2C-AE26-390FB6663D33}
+		{3002EFF3-7FE4-4857-A557-F883A601C4FE} = {83114F2B-0EA3-4375-B39C-6EE7BE7741CD}
+		{0ECA372B-6CF7-40DB-8A9B-D5AA878AE772} = {B757863F-0FC9-45FF-ACB9-A1FF14036FB5}
+		{46D4F01A-825F-44BA-AB95-096E2DC677BD} = {ABD40780-8464-44B1-A709-01983C75E494}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {020D8F05-32C8-489C-BE11-111B4E4F2B4D}

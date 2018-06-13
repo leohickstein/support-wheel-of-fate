@@ -24,17 +24,13 @@
     <button mat-raised-button color="primary" [disabled]="error.isError" (click)="generateSchedule()">Generate</button>
 </mat-card>
 <mat-card *ngIf="schedules.length > 0">
-    <h2>BAU Schedule:</h2>
-    <ul>
-        <li *ngFor="let schedule of schedules">
-            <div class="mat-card-title">{{schedule.date | date: "E"}} {{schedule.date | date: "mediumDate"}}</div>
-            <ul>
-                <li *ngFor="let bau of schedule.baus" class="mat-card-subtitle">
-                    {{bau.shift.name}}:
-                    <mat-icon matListIcon>person</mat-icon> {{bau.employee.name}}
-                </li>
-            </ul>
-            <br />
-        </li>
-    </ul>
+    <h2>BAU Schedule</h2>
+    <div *ngFor="let schedule of schedules">
+        <h3 style="color: #3F51B5;">{{schedule.date | date: "fullDate"}}</h3>
+        <div *ngFor="let bau of schedule.baus" class="mat-card-subtitle" class="flexbox-container">
+            <div class="container">{{bau.shift.name}}</div>
+            <br/>
+            <img alt="wheel" src="../../assets/engineer.png" style="vertical-align: middle;">{{bau.employee.name}}
+        </div>
+    </div>
 </mat-card>

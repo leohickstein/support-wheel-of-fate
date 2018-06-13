@@ -14,3 +14,28 @@ label {
     color: red;
     margin-left: 10px;
 }
+
+.alignmiddle {
+    vertical-align: middle;
+}
+
+.flexbox-container {
+    display: inline-block;
+    /*background-color: #FF4081;*/
+    background-color: #3F51B5;
+    color: white;
+    border-radius: 15px;
+    text-align: center;
+    width: 175px;
+    padding: 10px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    margin: 0 0 20px 20px;
+}
+
+.container {
+    font-size: small;
+    text-transform: uppercase;
+    background-color: white;
+    color: black;
+}

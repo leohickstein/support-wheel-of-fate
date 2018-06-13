@@ -1,0 +1,3 @@
+interface shift {
+    name: string;
+}

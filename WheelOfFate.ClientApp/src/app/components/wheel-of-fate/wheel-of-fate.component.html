@@ -1,3 +1,40 @@
-<p>
-  wheel-of-fate works!
-</p>
+<mat-card>
+    <br />
+    <label>Start Date:</label>
+    <mat-form-field>
+        <input matInput [matDatepicker]="startDatePicker" placeholder="Choose a date" [formControl]="startDate" (dateChange)="compareTwoDates()">
+        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <br />
+    <label>End Date:</label>
+    <mat-form-field>
+        <input matInput [matDatepicker]="endDatePicker" placeholder="Choose a date" [formControl]="endDate" (dateChange)="compareTwoDates()">
+        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+    <span *ngIf="error.isError" class="error">{{ error.errorMessage }}</span>
+    <br />
+    <label>Number of Shifts:</label>
+    <mat-slider thumbLabel tickInterval="1" min="1" max="10" step="1" [(ngModel)]="numberOfShifts"></mat-slider>
+    <br />
+    <label>Number of Employees:</label>
+    <mat-slider thumbLabel tickInterval="1" min="1" max="10" step="1" [(ngModel)]="numberOfEmployees"></mat-slider>
+    <br />
+    <button mat-raised-button color="primary" [disabled]="error.isError" (click)="generateSchedule()">Generate</button>
+</mat-card>
+<mat-card *ngIf="schedules.length > 0">
+    <h2>BAU Schedule:</h2>
+    <ul>
+        <li *ngFor="let schedule of schedules">
+            <div class="mat-card-title">{{schedule.date | date: "E"}} {{schedule.date | date: "mediumDate"}}</div>
+            <ul>
+                <li *ngFor="let bau of schedule.baus" class="mat-card-subtitle">
+                    {{bau.shift.name}}:
+                    <mat-icon matListIcon>person</mat-icon> {{bau.employee.name}}
+                </li>
+            </ul>
+            <br />
+        </li>
+    </ul>
+</mat-card>

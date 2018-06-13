@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WheelOfFate.Domain.Entities;
-using WheelOfFate.Domain.Interfaces;
+using WheelOfFate.Domain.Interfaces.Services;
 using WheelOfFate.Domain.Services.Helpers;
 
-namespace WheelOfFate.Domain
+namespace WheelOfFate.Domain.Services
 {
     /*
      * Business rules
@@ -14,9 +14,9 @@ namespace WheelOfFate.Domain
         ·  An engineer cannot have half day shifts on consecutive days
         ·  Each engineer should have completed one whole day of support in any 2 week period
      */
-    public class Flexible8x5BAUGenerator : IBAUGenerator
+    public class DefaultBauGeneratorStrategy : IBauGeneratorStrategy
     {
-        public List<Schedule> GenerateSchedule(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
+        public List<BauSchedule> GenerateBauSchedules(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
         {
             List<Shift> shifts = EntityGenerator.GenerateShifts(numberOfShifts);
             List <Employee> employees = EntityGenerator.GenerateEmployees(numberOfEmployees);
@@ -27,7 +27,7 @@ namespace WheelOfFate.Domain
             // Determine max number of employees allowed by shift
             var maxEmployeesByShift = numSlots / numberOfEmployees; // Example: 2 slots/employees = 20 slots / 10 employees
 
-            List<Schedule> BAUSchedule = new List<Schedule>();
+            List<BauSchedule> bauSchedule = new List<BauSchedule>();
 
             // Iterate through all days in the provided period
             for (DateTime currentDate = startDate; currentDate.Date <= endDate.Date; currentDate = currentDate.AddDays(1))
@@ -36,7 +36,7 @@ namespace WheelOfFate.Domain
                 if (currentDate.DayOfWeek == DayOfWeek.Saturday || currentDate.DayOfWeek == DayOfWeek.Sunday)
                     continue;
 
-                Schedule currentSchedule = new Schedule(currentDate);
+                BauSchedule currentSchedule = new BauSchedule(currentDate);
 
                 // Iterate through all shifts
                 foreach (var currentShift in shifts)
@@ -48,21 +48,21 @@ namespace WheelOfFate.Domain
                         .Where(e => e.Schedules.LastOrDefault() == null || e.Schedules.LastOrDefault().Date != currentDate.Date)
                         // BUSINESS RULE: An engineer cannot have half day shifts on consecutive days
                         .Where(e => e.Schedules.LastOrDefault() == null || e.Schedules.LastOrDefault().Date != new DateTime(currentDate.Year, currentDate.Month, currentDate.Day).AddDays(-1).Date)
+                        // Enforce a full cycle of employees
+                        .Where(e => e.Schedules.Count <= employees.Min(min => min.Schedules.Count))
                         // BUSINESS RULE: This should select engineers at random
                         .OrderBy(random => Guid.NewGuid()).FirstOrDefault();
 
                     if (randomEmployee != null)
                     {
                         // Using DDD to modify a domain entity
-                        randomEmployee.AddSchedule(new Schedule(currentDate));
-                        currentSchedule.BAUs.Add(new BAU(randomEmployee, currentShift));
+                        randomEmployee.AddSchedule(new BauSchedule(currentDate));
+                        currentSchedule.Baus.Add(new Bau(randomEmployee, currentShift));
                     }
                 }
-
-                BAUSchedule.Add(currentSchedule);
+                bauSchedule.Add(currentSchedule);
             }
-
-            return BAUSchedule;
+            return bauSchedule;
         }
     }
 }

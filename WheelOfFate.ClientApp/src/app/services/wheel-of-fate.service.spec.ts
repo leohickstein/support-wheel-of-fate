@@ -1,15 +1,17 @@
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject } from "@angular/core/testing";
+import { WheelOfFateService } from "./wheel-of-fate.service";
 
-import { WheelOfFateService } from './wheel-of-fate.service';
-
-describe('WheelOfFateService', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [WheelOfFateService]
+describe("WheelOfFateService", () => {
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            providers: [WheelOfFateService]
+        });
     });
-  });
 
-  it('should be created', inject([WheelOfFateService], (service: WheelOfFateService) => {
-    expect(service).toBeTruthy();
-  }));
+    it("should be created", inject(
+        [WheelOfFateService],
+        (service: WheelOfFateService) => {
+            expect(service).toBeTruthy();
+        }
+    ));
 });

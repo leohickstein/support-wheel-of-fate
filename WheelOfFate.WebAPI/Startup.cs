@@ -4,18 +4,20 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using WheelOfFate.Domain.Interfaces.Service;
+using WheelOfFate.Data;
+using WheelOfFate.Domain.Interfaces.Services;
 using WheelOfFate.Services;
 
 namespace WheelOfFate.WebAPI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration) // Injection of IConfiguration
         {
             Configuration = configuration;
         }
@@ -25,7 +27,18 @@ namespace WheelOfFate.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IBAUService, BAUService>();
+            services.AddScoped<IBauService, BauService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowFromAll",
+                    builder => builder
+                    .WithMethods("GET", "POST")
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader());
+            }); ;
+
+            services.AddDbContext<BauApiContext>(options => options.UseInMemoryDatabase());
 
             services.AddMvc();
         }
@@ -37,6 +50,8 @@ namespace WheelOfFate.WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowFromAll");
 
             app.UseMvc(routes =>
             {

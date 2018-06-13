@@ -1,0 +1,16 @@
+mat-card {
+    max-width: 60%;
+    margin: 2em auto;
+    /* text-align: center; */
+}
+
+label {
+    display: inline-block;
+    width: 180px;
+    padding-bottom: 25px;
+}
+
+.error {
+    color: red;
+    margin-left: 10px;
+}

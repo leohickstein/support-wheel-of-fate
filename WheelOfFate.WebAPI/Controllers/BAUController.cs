@@ -5,33 +5,38 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WheelOfFate.Domain.Entities;
-using WheelOfFate.Domain.Interfaces.Service;
+using WheelOfFate.Domain.Interfaces.Services;
 
 namespace WheelOfFate.WebAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/BAU")]
-    public class BAUController : Controller
+    [Route("api/v1/[controller]")]
+    public class BauController : Controller
     {
-        private readonly IBAUService _BAUService;
+        private readonly IBauService _bauService;
 
-        public BAUController(IBAUService BAUService)
+        public BauController(IBauService bauService) // Injection of IBauService
         {
-            _BAUService = BAUService ?? throw new ArgumentNullException(nameof(BAUService));
+            _bauService = bauService ?? throw new ArgumentNullException(nameof(bauService)); // Guard
         }
 
-        //[HttpGet]
-        //public IActionResult GetBAUScheduleOptions()
-        //{
-        //    List<string> result = _BAUService.GetBAUScheduleAlgorithms();
-        //    return Json(result);
-        //}
-
-        [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<BAU>), 200)]
-        public IActionResult GenerateBAUSchedules(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
+        [HttpGet("GetOptions")]
+        [ProducesResponseType(typeof(IEnumerable<string>), StatusCodes.Status200OK)]
+        public IActionResult GetBauScheduleStrategies()
         {
-            List<Schedule> result = _BAUService.GenerateBAUSchedules(startDate, endDate, numberOfShifts, numberOfEmployees);
+            List<string> result = _bauService.GetBauScheduleStrategies();
+            return Json(result);
+        }
+
+        [HttpGet("Generate")]
+        [ProducesResponseType(typeof(IEnumerable<BauSchedule>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult GenerateBauSchedule(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
+        {
+            if (startDate < new DateTime(2018, 6, 1) || endDate < new DateTime(2018, 6, 1) || numberOfShifts <= 0 || numberOfEmployees <= 0)
+                return BadRequest("Invalid data!");
+
+            var result = _bauService.GenerateBauSchedules(startDate, endDate, numberOfShifts, numberOfEmployees);
 
             return Json(result);
         }

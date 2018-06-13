@@ -8,69 +8,70 @@
 /* @import '~@angular/material/prebuilt-themes/purple-green.css'; */
 
 body {
-  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
-  margin: 0;
+    font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    margin: 0;
+    background-color: #fafafa;
 }
 
 wheel-of-fate-app {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  position: absolute;
-  top: 56px;
-  bottom: 0;
-  left: 0;
-  right: 0
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    bottom: 0;
+    left: 0;
+    right: 0
 }
 
 nav-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2
 }
 
 .docs-header-background {
-  background: #3f51b5;
+    background: #3f51b5;
 }
 
 .docs-header-section {
-  text-align: center;
-  padding-top: 60px;
-  padding-bottom: 10px;
+    text-align: center;
+    padding-top: 60px;
+    padding-bottom: 10px;
 }
 
 .docs-header-headline {
-  color: #fff;
+    color: #fff;
 }
 
 .docs-header-headline h1 {
-  font-size: 56px;
-  font-weight: 300;
-  line-height: 56px;
-  margin: 15px 5px;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 56px;
+    margin: 15px 5px;
 }
 
 .docs-header-headline h2 {
-  font-size: 18px;
-  font-weight: 300;
-  line-height: 28px;
-  margin: 15px 0 25px 0;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    margin: 15px 0 25px 0;
 }
 
 .docs-header-start {
-  text-align: center;
-  margin: 60px 0;
+    text-align: center;
+    margin: 60px 0;
 }
 
 header,
 div {
-  display: block;
+    display: block;
 }
 
 /* material-docs-app>app-component-sidenav {

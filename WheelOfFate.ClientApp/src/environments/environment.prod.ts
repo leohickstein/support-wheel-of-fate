@@ -1,6 +1,6 @@
 export const environment = {
-  production: true,
+    production: true,
 
-  // URL of production API
-  apiUrl: "http://localhost:57693/api/"
+    // URL of production API
+    apiUrl: "https://wheeloffatewebapi.azurewebsites.net/api/v1"
 };

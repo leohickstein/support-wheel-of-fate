@@ -1,36 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using WheelOfFate.Domain;
+using System.Reflection;
+using System.Threading.Tasks;
 using WheelOfFate.Domain.Entities;
-using WheelOfFate.Domain.Interfaces;
-using WheelOfFate.Domain.Interfaces.Service;
+using WheelOfFate.Domain.Interfaces.Services;
+using WheelOfFate.Domain.Services;
 
 namespace WheelOfFate.Services
 {
-    public class BAUService : IBAUService
+    public class BauService : IBauService
     {
-        // TODO: INjetar memoryDateConext
+        public BauService() { }
 
-        public BAUService()
+        /// <summary>
+        /// Retrieve available strategies for generating a BAU Schedule
+        /// </summary>
+        /// <returns>List of available strategies</returns>
+        public List<string> GetBauScheduleStrategies()
         {
-
+            return BauGeneratorService.GetStrategies();
         }
 
-        public List<Schedule> GenerateBAUSchedules(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
+        /// <summary>
+        /// Generate the BAU Schedule
+        /// </summary>
+        /// <param name="startDate">Start date</param>
+        /// <param name="endDate">End date</param>
+        /// <param name="numberOfShifts">Number of shifts</param>
+        /// <param name="numberOfEmployees">Number of employees</param>
+        /// <returns>List of BAU schedules</returns>
+        public List<BauSchedule> GenerateBauSchedules(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
         {
-            IBAUGenerator schedule = new Flexible8x5BAUGenerator();
-            return schedule.GenerateSchedule(startDate, endDate, numberOfShifts, numberOfEmployees);
+            BauGeneratorService generator = new BauGeneratorService(new DefaultBauGeneratorStrategy());
+            return generator.GenerateBauSchedules(startDate, endDate, numberOfShifts, numberOfEmployees);
         }
-
-        //public static List<string> GetBAUScheduleAlgorithms()
-        //{
-        //    var results = from type in someAssembly.GetTypes()
-        //                  where typeof(IFoo).IsAssignableFrom(type)
-        //                  select type;
-
-        //    return new List<string>();
-        //}
     }
 }

@@ -18,6 +18,7 @@ namespace WheelOfFate.Domain.Services
     {
         public List<BauSchedule> GenerateBauSchedules(DateTime startDate, DateTime endDate, int numberOfShifts, int numberOfEmployees)
         {
+
             List<Shift> shifts = EntityGenerator.GenerateShifts(numberOfShifts);
             List <Employee> employees = EntityGenerator.GenerateEmployees(numberOfEmployees);
 
@@ -25,7 +26,7 @@ namespace WheelOfFate.Domain.Services
             var numSlots = startDate.GetTotalWorkingDays(endDate, false) * numberOfShifts; //  Example: 20 slots = 2 slots by day * 10 days
 
             // Determine max number of employees allowed by shift
-            var maxEmployeesByShift = numSlots / numberOfEmployees; // Example: 2 slots/employees = 20 slots / 10 employees
+            var maxEmployeesByShift = Math.Ceiling(((double)numSlots) / ((double)numberOfEmployees)); // Example: 2 slots/employees = 20 slots / 10 employees
 
             List<BauSchedule> bauSchedule = new List<BauSchedule>();
 
